@@ -20,41 +20,49 @@ public class Main {
         int value, position;
         String num;
         do {
+            System.out.print("Choose command: ");
             num = in.next();
             switch (num) {
                 case ("1"):
-                    System.out.println("Enter a value: ");
+                    System.out.print("Enter a value: ");
                     while (!in.hasNextInt()) {
                         System.out.println("That not a number!");
-                        in.next(); // this is important!
+                        System.out.print("Enter a new value: ");
+                        in.next();
                     }
                     value = in.nextInt();
                     A.pushBack(value);
+                    System.out.println("Done!");
                     break;
                 case ("2"):
-                    System.out.println("Enter a value: ");
+                    System.out.print("Enter a value: ");
                     while (!in.hasNextInt()) {
                         System.out.println("That not a number!");
-                        in.next(); // this is important!
+                        System.out.print("Enter a new value: ");
+                        in.next();
                     }
                     value = in.nextInt();
                     A.pushFront(value);
+                    System.out.println("Done!");
                     break;
                 case ("3"):
                     try {
-                        System.out.println("Enter a value: ");
+                        System.out.print("Enter a value: ");
                         while (!in.hasNextInt()) {
                             System.out.println("That not a number!");
-                            in.next(); // this is important!
+                            System.out.print("Enter a new value: ");
+                            in.next();
                         }
                         value = in.nextInt();
-                        System.out.println("Enter a position: ");
+                        System.out.print("Enter a position: ");
                         while (!in.hasNextInt()) {
                             System.out.println("That not a number!");
-                            in.next(); // this is important!
+                            System.out.print("Enter a new position: ");
+                            in.next();
                         }
                         position = in.nextInt();
                         A.pushEl(position, value);
+                        System.out.println("Done!");
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     } finally {
@@ -63,6 +71,7 @@ public class Main {
                 case ("4"):
                     try {
                         A.delBack();
+                        System.out.println("Done!");
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     } finally {
@@ -71,6 +80,7 @@ public class Main {
                 case ("5"):
                     try {
                         A.delFront();
+                        System.out.println("Done!");
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     } finally {
@@ -78,13 +88,15 @@ public class Main {
                     }
                 case ("6"):
                     try {
-                        System.out.println("Enter a value: ");
+                        System.out.print("Enter a value: ");
                         while (!in.hasNextInt()) {
                             System.out.println("That not a number!");
-                            in.next(); // this is important!
+                            System.out.print("Enter a new value: ");
+                            in.next();
                         }
                         value = in.nextInt();
-                        A.delEl(value);;
+                        A.delEl(value);
+                        System.out.println("Done!");
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     } finally {
@@ -92,7 +104,7 @@ public class Main {
                     }
                 case ("7"):
                     try {
-                        System.out.println(A.ToString());
+                        System.out.println("Your list: " + A.toString());
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
@@ -101,10 +113,11 @@ public class Main {
                     }
                 case ("8"):
                     try {
-                        System.out.println("Enter a position: ");
+                        System.out.print("Enter a position: ");
                         while (!in.hasNextInt()) {
                             System.out.println("That not a number!");
-                            in.next(); // this is important!
+                            System.out.print("Enter a new position: ");
+                            in.next();
                         }
                         position = in.nextInt();
                         System.out.println(A.findEl(position));
@@ -115,6 +128,6 @@ public class Main {
                         break;
                     }
             }
-        } while (num != "");
+        } while (!num.equals("0"));
     }
 }

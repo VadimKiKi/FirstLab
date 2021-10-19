@@ -34,6 +34,9 @@ public class Container {
     public int getLength() { //получить длинну списка
         int length = 0;
         Node p = first;
+        if (isEmpty()) {
+            return length;
+        }
         while (p.next != null) {
             p = p.next;
             length++;
@@ -76,10 +79,11 @@ public class Container {
             p.next = first;
             first = p;
         }
+
     }
 
     /**
-     * Функция добавления элемента на на позицию после указанной
+     * Функция добавления элемента на позицию после указанной
      * @param position - позиция добавления
      * @param value - элемент
      * @throws Exception ошибка некорректного позиции
@@ -94,13 +98,24 @@ public class Container {
                 p = p.next;
                 index++;
             }
-            Node a = new Node();
-            a.value = p.value;
-            a.next = p.next;
-            p.value = value;
-            p.next = a;
-        }
-        else throw new Exception("Incorrect position");
+            if (index == 0) {
+                pushFront(value);
+            } else if (index == this.getLength()) {
+                Node a = new Node();
+                a.value = last.value;
+                last.next = a;
+                last.value = value;
+                last = a;
+            } else {
+                Node a = new Node();
+                a.value = p.value;
+                a.next = p.next;
+                p.value = value;
+                p.next = a;
+            }
+
+
+        } else throw new Exception("Incorrect position");
     }
 
     /**
@@ -136,6 +151,11 @@ public class Container {
         if (isEmpty()) {
             throw new Exception ("Empty list");
         }
+        if (first == last) {
+            first = null;
+            last = null;
+            return;
+        }
         first = first.next;
         return;
     }
@@ -162,6 +182,10 @@ public class Container {
             delFront();
             return;
         }
+        if (last.value == value) {
+            delBack();
+            return;
+        }
 
         Node t = first;
         while (t.next != null) {
@@ -180,12 +204,12 @@ public class Container {
 
     /**
      * Функция печати списка
-     * @return возвращает полученный список в виде строки
-     * @throws Exception ошибка пустого списка
+     * @return возвращает полученный список в виде строк
      */
-    public String ToString() throws Exception {
+    @Override
+    public String toString() {
         if (isEmpty()) {
-            throw new Exception ("Empty list");
+            return "Empty list";
         }
         String result = "";
         Node p = first;
